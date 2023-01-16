@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
         },
         tooltip: 'Adicionar',
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

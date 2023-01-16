@@ -10,7 +10,6 @@ Future<List<Map<String, dynamic>>> readDatabase() async {
     notes.sort(((a, b) => a['title'].compareTo(b['title'])));
     return notes;
   } catch (e) {
-    print("Erro ao ler o banco de dados: $e");
     return [];
   }
 }

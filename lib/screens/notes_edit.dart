@@ -12,7 +12,7 @@ class NotesEdit extends StatefulWidget {
   State<NotesEdit> createState() => _NotesEditState();
 }
 
-class _NotesEditState extends State<NotesEdit> {
+class _NotesEditState extends State<NotesEdit> with WidgetsBindingObserver {
   String noteTitle = '';
   String noteContent = '';
 
@@ -34,6 +34,7 @@ class _NotesEditState extends State<NotesEdit> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     noteTitle = widget.args[0] == 'new' ? '' : widget.args[1]['title'];
     noteContent = widget.args[0] == 'new' ? '' : widget.args[1]['content'];
     titleController.text =
@@ -48,7 +49,26 @@ class _NotesEditState extends State<NotesEdit> {
   void dispose() {
     titleController.dispose();
     contentController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.inactive) {
+      if (noteContent.isNotEmpty) {
+        saveNote(noteTitle, noteContent, widget.args, context);
+      }
+    }
+  }
+
+  void handleBack() {
+    if (noteContent.isEmpty) {
+      Navigator.pop(context);
+    } else {
+      saveNote(noteTitle, noteContent, widget.args, context);
+    }
   }
 
   @override
@@ -63,7 +83,7 @@ class _NotesEditState extends State<NotesEdit> {
               color: Color.fromARGB(255, 255, 255, 255)),
           tooltip: 'Voltar',
           onPressed: () {
-            Navigator.pop(context);
+            handleBack();
           },
         ),
         title: NoteTitleEntry(titleController),
@@ -100,7 +120,7 @@ class NoteTitleEntry extends StatelessWidget {
         contentPadding: EdgeInsets.all(0),
         counter: null,
         counterText: "",
-        hintText: 'Título',
+        hintText: 'Digite um título aqui',
         hintStyle: TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.bold,

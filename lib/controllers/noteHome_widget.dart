@@ -84,6 +84,8 @@ class DisplayNotes extends StatelessWidget {
               children: [
                 Text(
                   notesData['title'],
+                  overflow: TextOverflow.clip,
+                  maxLines: 1,
                   style: const TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.bold,
@@ -95,6 +97,8 @@ class DisplayNotes extends StatelessWidget {
                 ),
                 Text(
                   notesData['content'],
+                  overflow: TextOverflow.clip,
+                  maxLines: 1,
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
@@ -113,7 +117,7 @@ class DisplayNotes extends StatelessWidget {
 class BottomActionBar extends StatelessWidget {
   final VoidCallback handleDelete;
 
-  BottomActionBar(this.handleDelete, {super.key});
+  const BottomActionBar(this.handleDelete, {super.key});
 
   @override
   Widget build(BuildContext context) {
