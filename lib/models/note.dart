@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 class Note {
   int? id;
@@ -9,7 +8,7 @@ class Note {
   Note({this.id, this.title = "Note", this.content = "Text"});
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> data = Map<String, dynamic>();
+    Map<String, dynamic> data = <String, dynamic>{};
     if (id != null) {
       data['id'] = id;
     }

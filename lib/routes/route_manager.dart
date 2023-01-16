@@ -9,9 +9,10 @@ class GenerateAllRoutes {
   ) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const Home());
+        return MaterialPageRoute(builder: (context) => const Home());
       case '/notes_edit':
-        return MaterialPageRoute(builder: (_) => NotesEdit(settings.arguments));
+        return MaterialPageRoute(
+            builder: (context) => NotesEdit(settings.arguments));
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

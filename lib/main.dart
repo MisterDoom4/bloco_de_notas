@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/routes/route_manager.dart';
+import 'routes/route_manager.dart';
 
 void main() {
-  runApp(AppEntry());
+  runApp(const AppEntry());
 }
 
 class AppEntry extends StatelessWidget {

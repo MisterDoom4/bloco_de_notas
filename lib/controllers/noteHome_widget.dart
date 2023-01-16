@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 class AllNotesLists extends StatelessWidget {
@@ -8,7 +10,8 @@ class AllNotesLists extends StatelessWidget {
   final handleNoteListTapAfterSelect;
 
   const AllNotesLists(this.data, this.selectedNoteIds, this.afterNavigatorPop,
-      this.handleNoteListLongPress, this.handleNoteListTapAfterSelect);
+      this.handleNoteListLongPress, this.handleNoteListTapAfterSelect,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,8 @@ class DisplayNotes extends StatelessWidget {
       this.selectedNote,
       this.callAfterNavigatorPop,
       this.handleNoteListLongPress,
-      this.handleNoteListTapAfterSelect);
+      this.handleNoteListTapAfterSelect,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,10 @@ class DisplayNotes extends StatelessWidget {
           onTap: () {
             if (selectedNote == false) {
               if (selectedNoteIds.length == 0) {
-                print('clicked');
+                Navigator.pushNamed(context, '/notes_edit',
+                    arguments: ['edit', notesData]).then((dynamic value) {
+                  callAfterNavigatorPop();
+                });
               } else {
                 handleNoteListLongPress(notesData['id']);
               }
@@ -106,7 +113,7 @@ class DisplayNotes extends StatelessWidget {
 class BottomActionBar extends StatelessWidget {
   final VoidCallback handleDelete;
 
-  BottomActionBar(this.handleDelete);
+  BottomActionBar(this.handleDelete, {super.key});
 
   @override
   Widget build(BuildContext context) {

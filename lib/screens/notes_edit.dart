@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 import '../controllers/save_widget.dart';
@@ -32,6 +34,12 @@ class _NotesEditState extends State<NotesEdit> {
   @override
   void initState() {
     super.initState();
+    noteTitle = widget.args[0] == 'new' ? '' : widget.args[1]['title'];
+    noteContent = widget.args[0] == 'new' ? '' : widget.args[1]['content'];
+    titleController.text =
+        (widget.args[0] == 'new' ? '' : widget.args[1]['title']);
+    contentController.text =
+        (widget.args[0] == 'new' ? '' : widget.args[1]['content']);
     titleController.addListener(handleTitleChange);
     contentController.addListener(handleContentChange);
   }
@@ -65,7 +73,7 @@ class _NotesEditState extends State<NotesEdit> {
                   color: Color.fromARGB(255, 255, 255, 255)),
               tooltip: 'Salvar',
               onPressed: () {
-                saveNote(noteTitle, noteContent, context);
+                saveNote(noteTitle, noteContent, widget.args, context);
               }),
         ],
       ),
